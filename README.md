@@ -10,7 +10,7 @@ A web application that allows users to browse and book seats for upcoming commun
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/NivethaMercy110211/Django-Developer.git
-cd event-booking-system
+cd event_booking_system
 ```
 
 ### 2. Create and activate a virtual environment
