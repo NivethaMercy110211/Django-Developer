@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Event Booking</title>
+</head>
+<body>
+    <header>
+        <h1>Community Center Events</h1>
+        {% if next_event %}
+            <p>Next Event: <strong>{{ next_event.title }}</strong> on {{ next_event.date }}</p>
+        {% endif %}
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>Event Booking System &copy; {{ now|date:'Y' }}</p>
+    </footer>
+</body>
+</html>

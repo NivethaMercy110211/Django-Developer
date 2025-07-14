@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load booking_extras %}
+{% block content %}
+<h2>{{ event.title }}</h2>
+<p>{{ event.description }}</p>
+<p><strong>Date:</strong> {{ event.date }}</p>
+
+<p><strong>Seats Left:</strong> {{ event|seats_left }}</p>
+
+<div class="progress-bar" style="width: {{ percent_booked }}%;">
+    {{ percent_booked }}% booked
+</div>
+
+{% if event.is_sold_out %}
+    <p class="sold-out"><strong>This event is sold out.</strong></p>
+{% else %}
+    <h3>Book Your Seats</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Book</button>
+    </form>
+{% endif %}
+
+<a href="{% url 'event_list' %}">Back to Events</a>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load booking_extras %}
+
+{% block content %}
+<h2>Upcoming Events</h2>
+
+<ul class="event-list">
+    {% for event in events %}
+        <li>
+            {% if event.image %}
+                <img src="{{ event.image.url }}" alt="{{ event.title }}" style="max-height: 100px; border-radius: 6px;">
+            {% endif %}
+            <div>
+                <a href="{% url 'event_detail' event.pk %}">
+                    {{ event.title }} - {{ event.date }}
+                </a>
+                {% if event.is_sold_out %}
+                    <span class="sold-out">(Sold Out)</span>
+                {% endif %}
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+
+
+<!-- Pagination controls -->
+<div class="pagination">
+    {% if events.has_previous %}
+        <a href="?page=1">&laquo; First</a>
+        <a href="?page={{ events.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span>Page {{ events.number }} of {{ events.paginator.num_pages }}</span>
+
+    {% if events.has_next %}
+        <a href="?page={{ events.next_page_number }}">Next</a>
+        <a href="?page={{ events.paginator.num_pages }}">Last &raquo;</a>
+    {% endif %}
+</div>
+
+{% endblock %}
